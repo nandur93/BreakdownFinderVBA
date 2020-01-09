@@ -1,0 +1,25 @@
+Sub delNotPurple()
+    Dim i As Long
+    'Finds the last non-blank row on a sheet/range.
+
+    Dim lCol As Long
+    
+    On Error Resume Next
+    lCol = Cells.Find(What:="*", _
+                    After:=Range("A3"), _
+                    LookAt:=xlPart, _
+                    LookIn:=xlFormulas, _
+                    SearchOrder:=xlByColumns, _
+                    SearchDirection:=xlPrevious, _
+                    MatchCase:=False).Column
+    On Error GoTo 0
+
+    With ActiveSheet
+        For i = 1 To lCol
+            If Cells(3, i).Interior.color <> 10498160 Then
+            Cells(3, i).Select
+            Selection.EntireColumn.Delete
+            End If
+        Next i
+    End With
+End Sub
