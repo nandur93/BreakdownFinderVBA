@@ -1,0 +1,22 @@
+Sub loopPurple()
+Range("A1").Select
+'Warnai semua cell yang diperlukan dan tandai dengan warna ungu
+    Dim myArray(1 To 3) As String
+    Dim i As Integer
+    myArray(1) = "tgl."
+    myArray(2) = "Item Code"
+    myArray(3) = "Breakdown"
+    For i = 1 To UBound(myArray)
+        On Error Resume Next
+        Cells.Find(What:=myArray(i), After:=ActiveCell, LookIn:=xlFormulas, _
+                   LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, _
+                   MatchCase:=True, SearchFormat:=False).Activate
+        With Selection.Interior
+            .Pattern = xlSolid
+            .PatternColorIndex = xlAutomatic
+            .color = 10498160
+            .TintAndShade = 0
+            .PatternTintAndShade = 0
+        End With
+    Next i
+End Sub
